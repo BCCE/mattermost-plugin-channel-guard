@@ -1,0 +1,16 @@
+{
+    "id": "com.mattermost.channel-guard",
+    "name": "Channel-Guard",
+    "description": "Stops users from posting in places they shouldnt",
+    "version": "0.1.0",
+    "server": {
+        "executables": {
+            "linux-amd64": "server/plugin-linux-amd64",
+            "darwin-amd64": "server/plugin-darwin-amd64",
+            "windows-amd64": "server/plugin-windows-amd64.exe"
+        }
+    },
+    "settings_schema": {
+        "header": "Configure this plugin directly in the config.json file"
+    }
+}

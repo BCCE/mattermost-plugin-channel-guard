@@ -17,7 +17,6 @@ const (
 // LanBotPlugin is the main plugin struct
 type guard struct {
 	plugin.MattermostPlugin
-
 	botUserID string
 
 	guards atomic.Value

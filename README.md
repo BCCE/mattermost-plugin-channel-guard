@@ -14,7 +14,7 @@ To configure the Guard, edit your `config.json` file with the following format:
 
 ```
 "plugins": {
-	"com.mattermost.system-guard": {
+	"com.mattermost.channel-guard": {
 		"guards":[
 			{
 			"TeamName": "your-team-name",

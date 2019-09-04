@@ -1,10 +1,10 @@
 # Channel Guard Plugin
 
-Use this plugin to make channels read-only to some and writeable to other users. Channel Admins, Team admin, bots and system are all allowed to post still. 
+Use this plugin to make channels read-only to some and writeable to other users. Channel Admins, Team admin, bots and system are all allowed to post. 
 
 ## Configuration
 
-1. Go to **System Console > Plugins > Management** and click **Enable** to enable the Welcome Bot plugin.
+1. Go to **System Console > Plugins > Management** and click **Enable** to enable the Channel Guard plugin.
 
 2. Modify your `config.json` file to include your Guards, under the `PluginSettings`. See below for an example of what this should look like.
 

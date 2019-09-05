@@ -16,7 +16,7 @@ require (
 	github.com/hashicorp/go-plugin v1.0.1 // indirect
 	github.com/lib/pq v1.2.0 // indirect
 	github.com/mattermost/gorp v2.0.0+incompatible // indirect
-	github.com/mattermost/mattermost-server v5.11.1+incompatible
+	github.com/mattermost/mattermost-server v5.12.0+incompatible
 	github.com/mattn/go-sqlite3 v1.11.0 // indirect
 	github.com/onsi/ginkgo v1.10.1 // indirect
 	github.com/onsi/gomega v1.7.0 // indirect

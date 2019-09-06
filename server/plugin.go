@@ -38,7 +38,7 @@ func (p *guard) OnActivate() error {
 		return errors.Wrap(apperr, "failed to ensure bot user")
 	}
 
-	if err := p.setBotIcon(bot.UserId); err != nil {
+	if err := p.setBotIcon(botUserID); err != nil {
 		p.API.LogWarn("Failed to set profile image for bot", "err", err)
 	}
 

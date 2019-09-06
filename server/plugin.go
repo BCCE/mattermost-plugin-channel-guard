@@ -50,11 +50,11 @@ func (p *guard) OnActivate() error {
 func (p *guard) setBotIcon(botUserID string) *model.AppError {
 	bundlePath, err := p.API.GetBundlePath()
 	if err != nil {
-		return &Model.AppError{Message: err.Error()}
+		return &model.AppError{Message: err.Error()}
 	}
 	icon, err := p.readFile(filepath.Join(bundlePath, "assets", "icon.png"))
 	if err != nil {
-		return &Model.AppError{Message: err.Error()}
+		return &model.AppError{Message: err.Error()}
 	}
 
 	return p.API.SetProfileImage(botUserID, icon)

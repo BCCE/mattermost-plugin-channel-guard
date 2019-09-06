@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	plugin.ClientMain(&guard{})
+	plugin.ClientMain(&guard{readFile: ioutil.ReadFile})
 }

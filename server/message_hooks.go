@@ -95,32 +95,19 @@ func (p *guard) checker(post *model.Post, team *model.Team, users []*model.User,
 	guardChannel, _ := p.API.GetChannelByName(team.Id, guard.ChannelName, false)
 
 	if post.ChannelId == guardChannel.Id {
-		if len(users) == 0 {
-			p.API.SendEphemeralPost(post.UserId, &model.Post{
-				UserId:    p.botUserID,
-				ChannelId: guardChannel.Id,
-				Message:   message,
-			})
-
-			return nil
-		}
-
-		for _, user := range users {
-
-			if post.UserId == user.Id {
-				return post
+		if len(users) != 0 {
+			for _, user := range users {
+				if post.UserId == user.Id {
+					return post
+				}
 			}
-
-			p.API.SendEphemeralPost(post.UserId, &model.Post{
-				UserId:    p.botUserID,
-				ChannelId: guardChannel.Id,
-				Message:   message,
-			})
-
-			return nil
-
 		}
+		p.API.SendEphemeralPost(post.UserId, &model.Post{
+			UserId:    p.botUserID,
+			ChannelId: guardChannel.Id,
+			Message:   message,
+		})
+		return nil
 	}
-
 	return post
 }

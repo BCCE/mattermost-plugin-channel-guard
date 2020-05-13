@@ -1,11 +1,12 @@
 package main
 
 import (
+	"io/ioutil"
 	"path/filepath"
-	"sync/atomic"
+	"sync"
 
-	"github.com/mattermost/mattermost-server/model"
-	"github.com/mattermost/mattermost-server/plugin"
+	"github.com/mattermost/mattermost-server/v5/model"
+	"github.com/mattermost/mattermost-server/v5/plugin"
 	"github.com/pkg/errors"
 )
 
@@ -15,24 +16,25 @@ const (
 	botDescription = "Guards the channels so you dont have to"
 )
 
-// LanBotPlugin is the main plugin struct
-type guard struct {
+// Plugin struct for the plugin
+type Plugin struct {
 	plugin.MattermostPlugin
+
+	configlock sync.RWMutex
+
 	botUserID string
 
-	guards atomic.Value
-
-	readFile func(path string) ([]byte, error)
-
+	config *configuration
 }
 
 // OnActivate registers the command
-func (p *guard) OnActivate() error {
+func (p *Plugin) OnActivate() error {
 	bot := &model.Bot{
 		Username:    botUsername,
 		DisplayName: botDisplayName,
 		Description: botDescription,
 	}
+
 	botUserID, apperr := p.Helpers.EnsureBot(bot)
 	if apperr != nil {
 		return errors.Wrap(apperr, "failed to ensure bot user")
@@ -47,15 +49,24 @@ func (p *guard) OnActivate() error {
 	return nil
 }
 
-func (p *guard) setBotIcon(botUserID string) *model.AppError {
+func (p *Plugin) setBotIcon(botUserID string) *model.AppError {
 	bundlePath, err := p.API.GetBundlePath()
-	if err != nil {
-		return &model.AppError{Message: err.Error()}
-	}
-	icon, err := p.readFile(filepath.Join(bundlePath, "assets", "icon.png"))
-	if err != nil {
-		return &model.AppError{Message: err.Error()}
-	}
+	p.Check(err)
+
+	icon, err := ioutil.ReadFile(filepath.Join(bundlePath, "assets", "icon.png"))
+	p.Check(err)
 
 	return p.API.SetProfileImage(botUserID, icon)
+}
+
+// Check takes care of error handling
+func (p *Plugin) Check(e error) *model.AppError {
+	if e != nil {
+		return &model.AppError{Message: e.Error()}
+	}
+	return nil
+}
+
+func main() {
+	plugin.ClientMain(&Plugin{})
 }

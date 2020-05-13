@@ -1,9 +1,9 @@
 package main
 
 var manifest = struct {
-	Id      string
+	ID      string
 	Version string
 }{
-	Id:      "com.mattermost.channel-guard",
+	ID:      "com.mattermost.channel-guard",
 	Version: "0.2.0",
 }

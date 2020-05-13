@@ -2,7 +2,7 @@
     "id": "com.mattermost.channel-guard",
     "name": "Channel-Guard",
     "description": "Stops users from posting in places they shouldnt",
-    "version": "0.1.2",
+    "version": "0.2.0",
     "server": {
         "executables": {
             "linux-amd64": "server/dist/plugin-linux-amd64",
@@ -11,6 +11,36 @@
         }
     },
     "settings_schema": {
-        "header": "Configure this plugin directly in the config.json file"
+        "settings": [
+          {
+            "key": "ReadOnlyChannels",
+            "display_name": "Read-Only Channels",
+            "type": "text",
+            "help_text": "List of read-only channels. Comma-Space separated.",
+            "placeholder": "channel1, channel2, channel3"
+          },
+          {
+            "key": "AllowedUsers",
+            "display_name": "Allowed Users",
+            "type": "text",
+            "help_text": "List of users allowed to post in read-only channels. Comma-Space separated.",
+            "placeholder": "user1, user2, user3"
+          },
+          {
+            "key": "TeamName",
+            "display_name": "Team Name",
+            "type": "text",
+            "help_text": "Server/Team Name (only accepts one Team for now)"
+          },
+          {
+            "key": "ChannelGuardMsg",
+            "display_name": "Channel Guard Message",
+            "type": "text",
+            "help_text": "This is the message the users will see when trying to post to a Read-Only Channel.",
+            "default": "This channel is under guard. You do not have the permissions to post. Please contact the system administrators if you beleive this is incorrect"
+          }
+        ],
+        "header": "Channel-Guard configuration settings",
+        "footer": "* To report an issue, make a suggestion or a contribution, [check the repository](https://github.com/BCCE/mattermost-plugin-channel-guard/issues)."
     }
 }

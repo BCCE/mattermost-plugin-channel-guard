@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/mattermost/mattermost-server/model"
-	"github.com/mattermost/mattermost-server/plugin"
+	"github.com/mattermost/mattermost-server/v5/model"
+	"github.com/mattermost/mattermost-server/v5/plugin"
 )
 
 const message = "This channel is under guard. You do not have the permissions to post. Please contact the system administrators if you beleive this is incorrect"

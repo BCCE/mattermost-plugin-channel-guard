@@ -7,7 +7,7 @@ import (
 	"github.com/mattermost/mattermost-server/v5/plugin"
 )
 
-const message = "This channel is under guard. You do not have the permissions to post. Please contact the system administrators if you beleive this is incorrect"
+const message = "This channel is under guard. You do not have the permissions to post. Please contact the system administrators if you believe this is incorrect"
 
 func (p *guard) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string) {
 
@@ -43,15 +43,13 @@ func (p *guard) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model
 				}
 
 				returnedPost := p.checker(post, team, users, guard)
-				if returnedPost != nil {
-					return post, ""
+				if returnedPost == nil {
+					str := fmt.Sprintf("%s attempted to post in channel %s", post.UserId, post.ChannelId)
+					return nil, str
 				}
 
-				str := fmt.Sprintf("%s attempted to post in channel %s", post.UserId, post.ChannelId)
+            }
 
-				return nil, str
-
-			}
 		}
 	}
 

@@ -2,10 +2,36 @@
 
 package main
 
-var manifest = struct {
-	ID      string
-	Version string
-}{
-	ID:      "com.mattermost.channel-guard",
-	Version: "0.1.2",
+import (
+	"strings"
+
+	"github.com/mattermost/mattermost-server/v5/model"
+)
+
+var manifest *model.Manifest
+
+const manifestStr = `
+{
+  "id": "com.mattermost.channel-guard",
+  "name": "Channel-Guard",
+  "description": "Stops users from posting in places they shouldnt",
+  "version": "0.1.2",
+  "server": {
+    "executables": {
+      "linux-amd64": "server/dist/plugin-linux-amd64",
+      "darwin-amd64": "server/dist/plugin-darwin-amd64",
+      "windows-amd64": "server/dist/plugin-windows-amd64.exe"
+    },
+    "executable": ""
+  },
+  "settings_schema": {
+    "header": "Configure this plugin directly in the config.json file",
+    "footer": "",
+    "settings": null
+  }
+}
+`
+
+func init() {
+	manifest = model.ManifestFromJson(strings.NewReader(manifestStr))
 }
